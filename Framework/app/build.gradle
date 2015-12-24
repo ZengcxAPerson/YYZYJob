@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
+//    useLibrary 'org.apache.http.legacy' //导入httpclient，6.0以下不用导入，因为暂不考虑6.0系统
+    defaultConfig {
+        applicationId "com.ane.framework"
+        minSdkVersion 11
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            //解决Android方法数不能超出65K,分包
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //自动移除不用资源
+            //shrinkResources true
+        }
+
+    }
+    //兼容老版本(是gradle的老版本？)的一些设置
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+dependencies {
+    repositories {
+        mavenCentral()
+        //滑动删除listview的配置
+//        maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
+    }
+    //gradlelibs目录下的所有jar文件
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //    //单元测试
+    //    testCompile 'junit:junit:4.12'
+    //谷歌系统兼容包
+    compile 'com.android.support:appcompat-v7:22.0.0+'
+    //谷歌设计规范兼容包
+    compile 'com.android.support:design:22.2.0+'
+    //recyclerview兼容包
+    compile 'com.android.support:recyclerview-v7:22.+'
+    //v4兼容包
+    compile 'com.android.support:support-v4:22.2.0+'
+    //cardview兼容包
+    compile 'com.android.support:cardview-v7:22.+'
+    //图片加载框架：fresco,最低兼容在9以上
+    compile 'com.facebook.fresco:fresco:0.6.0+'
+    //log工具
+    compile 'com.orhanobut:logger:1.8+'
+    //解决android方法数不能超出65k
+    compile 'com.android.support:multidex:1.0.0'
+    //内存泄露检查工具
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1+'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1+'
+    //滑动删除listview
+    //    compile('com.fortysevendeg.swipelistview:swipelistview:1.0-SNAPSHOT@aar') {
+    //        transitive = true
+    //    }
+    // listview上拉加载下拉刷新
+    //    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
+    compile project(':base_library_pullToRefresh_chenyoca')
+    //APP错误异常捕捉library
+    compile project(':catch_error_library')
+    //滑动返回类库
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0+'
+    //okHttpUtils,同时他也会关联okHttp
+    compile 'com.zhy:okhttputils:2.0.2+'
+}
