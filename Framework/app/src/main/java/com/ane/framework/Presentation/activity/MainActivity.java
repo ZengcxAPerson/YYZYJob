@@ -7,15 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 
-import com.ane.framework.Base.activity.BaseActivity;
+import com.ane.framework.Base.activity.IBaseActivity;
 import com.ane.framework.Base.callback.DefaultAsyncCallback;
 import com.ane.framework.Base.network.AsyncRequestService;
 import com.ane.framework.Base.network.ResultMsg;
 import com.ane.framework.R;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends IBaseActivity {
     private Button tetBtn;
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -23,7 +22,32 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        AsyncRequestService service = new AsyncRequestService("");
+        service.setAsyncRequestCallBack(new DefaultAsyncCallback(this,null) {
+            @Override
+            public void onEnd(Context context, ResultMsg resultMsg) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void disposeBusiness() {
+
+    }
+    @Override
+    protected void findViews() {
         this.tetBtn = (Button) findViewById(R.id.tetBtn);
+
+    }
+
+    @Override
+    protected void setViewsContent() {
+        tetBtn.setText("示例");
+    }
+
+    @Override
+    protected void setViewsListener() {
         tetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,15 +56,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, Main2Activity.class));
             }
         });
-        AsyncRequestService service = new AsyncRequestService("");
-        service.setAsyncRequestCallBack(new DefaultAsyncCallback(this,null) {
-            @Override
-            public void onEnd(Context context, ResultMsg resultMsg) {
-
-            }
-        });
-        SearchView searchView=new SearchView(this);
-
     }
+
 
 }

@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ane.framework.Base.activity.BaseAppcomatAty;
+import com.ane.framework.Base.activity.IBaseAppCompatAty;
 import com.ane.framework.Base.callback.DefaultOkHttpCallback;
 import com.ane.framework.Base.network.OkHttpUtil;
 import com.ane.framework.Base.network.ResultMsg;
@@ -19,7 +19,7 @@ import com.squareup.okhttp.Request;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class Main2Activity extends BaseAppcomatAty {
+public class Main2Activity extends IBaseAppCompatAty {
     Snackbar snackbar;
     FloatingActionButton fab;
     long oneTime = 0, twoTime = 0;
@@ -70,6 +70,26 @@ public class Main2Activity extends BaseAppcomatAty {
 
             }
         });
+
+    }
+
+    @Override
+    protected void disposeBusiness() {
+
+    }
+
+    @Override
+    protected void findViews() {
+
+    }
+
+    @Override
+    protected void setViewsContent() {
+
+    }
+
+    @Override
+    protected void setViewsListener() {
 
     }
 

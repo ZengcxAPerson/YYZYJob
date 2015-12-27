@@ -21,6 +21,7 @@ public abstract class DefaultAsyncCallback implements AsyncRequestService.AsyncR
 
     /**
      * 查看类说明
+     * @param context 上下文
      */
     public DefaultAsyncCallback(Context context) {
         this.mContext = context;
@@ -30,6 +31,8 @@ public abstract class DefaultAsyncCallback implements AsyncRequestService.AsyncR
 
     /**
      * 查看类说明
+     * @param context 上下文
+     * @param dialog 请求出现的dialog,可以为null。即为不出现
      */
     public DefaultAsyncCallback(Context context,Dialog dialog) {
         this.mDialog = dialog;
