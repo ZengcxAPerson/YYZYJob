@@ -44,3 +44,5 @@ captures/
 gen-external-apklibs
 
 test
+*.iml
+Framework/.idea/misc.xml

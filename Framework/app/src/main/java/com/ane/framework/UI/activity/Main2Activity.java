@@ -1,4 +1,4 @@
-package com.ane.framework.Presentation.activity;
+package com.ane.framework.UI.activity;
 
 import android.content.Context;
 import android.os.Bundle;
