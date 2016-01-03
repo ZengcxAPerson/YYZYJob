@@ -10,7 +10,6 @@ public class TestActivity extends IBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
-        throw new IllegalArgumentException("错误");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.ane.framework.UI.activity;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -46,9 +45,11 @@ public class MainActivity extends IBaseActivity {
             public void onClick(View v) {
 //                Snackbar.make(v, "测试", Snackbar.LENGTH_LONG)
 //                        .setAction("退出", null).show();
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+//                startActivity(new Intent(MainActivity.this, TestActivity.class));
+                throw new IllegalArgumentException("错误");
             }
         });
+
     }
 
 

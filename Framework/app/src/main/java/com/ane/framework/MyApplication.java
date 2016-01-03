@@ -23,7 +23,7 @@ public class MyApplication extends Application {
     private final static String TAG = "TAG";
     private LinkedList<Activity> mSaveActivity;
     private RefWatcher refWatcher;
-    private static final String BUG_TAGS_KEY = "bb4f175631df895486f0298853c49bda";
+    private static final String BUG_TAGS_KEY = "5b75ed82bc8f0b7f5358ebd92076c2ad";
 
 
     private static final String APP_VERSION_TYPE="debug";
