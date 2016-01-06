@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ane.framework.Base.interFace.ActivityToFragment;
+import com.ane.framework.Base.interFace.ActivityWritCode;
 import com.ane.framework.MyApplication;
 
 /**
@@ -16,7 +17,7 @@ import com.ane.framework.MyApplication;
  * <p>建立公共的代码规范</p>
  * Created by Administrator on 2015/12/3.
  */
-public abstract class IBaseAppCompatAty extends AppCompatActivity implements ActivityToFragment {
+public abstract class IBaseAppCompatAty extends AppCompatActivity implements ActivityToFragment,ActivityWritCode {
 
     protected MyApplication application;
     private static final String TAG = "Base-CompatActivity";
@@ -29,12 +30,17 @@ public abstract class IBaseAppCompatAty extends AppCompatActivity implements Act
         application.addActivity(this);
         mFragmentManager= getFragmentManager();
 
+    }
+    /**
+     * <p>在子Activity初始化的时候调用</p>
+     * <p>将所有对代码规范的的初始化</p>
+     */
+    protected void activityWritInit() {
         findViews();
         setViewsContent();
         setViewsListener();
         disposeBusiness();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -72,24 +78,5 @@ public abstract class IBaseAppCompatAty extends AppCompatActivity implements Act
         mFragmentManager.beginTransaction().hide(hideFragment).commit();
     }
 
-    /**
-     * 描述：处理业务逻辑
-     */
-    protected abstract void disposeBusiness();
-
-    /**
-     * 描述：把所有View找出来
-     */
-    protected abstract void findViews();
-
-    /**
-     * 描述：设置所有View的内容
-     */
-    protected abstract void setViewsContent();
-
-    /**
-     * 描述：设置View的监控器
-     */
-    protected abstract void setViewsListener();
 
 }

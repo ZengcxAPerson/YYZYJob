@@ -1,9 +1,9 @@
 package com.ane.framework.Base.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ane.framework.Base.interFace.ActivityWritCode;
 import com.ane.framework.MyApplication;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -13,7 +13,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * <p>建立公共的代码规范</p>
  * Created by Administrator on 2015/11/27.
  */
-public abstract class IBaseSwipeBackAty extends SwipeBackActivity {
+public abstract class IBaseSwipeBackAty extends SwipeBackActivity implements ActivityWritCode {
     protected MyApplication application;
     protected static final String TAG = "Base-SwipeBackAty";
 
@@ -22,12 +22,17 @@ public abstract class IBaseSwipeBackAty extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         application = (MyApplication) getApplication();
         application.addActivity(this);
+    }
+    /**
+     * <p>在子Activity初始化的时候调用</p>
+     * <p>将所有对代码规范的的初始化</p>
+     */
+    protected void activityWritInit() {
         findViews();
         setViewsContent();
         setViewsListener();
         disposeBusiness();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -37,20 +42,4 @@ public abstract class IBaseSwipeBackAty extends SwipeBackActivity {
                     "please you see leaks the Memory overflow!");
         }
     }
-    /**
-     * 描述：处理业务逻辑
-     */
-    protected abstract void disposeBusiness();
-    /**
-     * 描述：把所有View找出来
-     */
-    protected abstract void findViews();
-    /**
-     * 描述：设置所有View的内容
-     */
-    protected abstract void setViewsContent();
-    /**
-     * 描述：设置View的监控器
-     */
-    protected abstract void setViewsListener();
 }
