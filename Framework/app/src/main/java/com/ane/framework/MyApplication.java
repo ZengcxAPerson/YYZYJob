@@ -3,7 +3,6 @@ package com.ane.framework;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.ane.framework.Base.util.TempUtil;
 import com.bugtags.library.Bugtags;
@@ -21,12 +20,15 @@ import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 public class MyApplication extends Application {
     //程序log日志的标签,可以修改
     private final static String TAG = "TAG";
+    //保存Activity的队列
     private LinkedList<Activity> mSaveActivity;
     private RefWatcher refWatcher;
+    //bugTags应用key
     private static final String BUG_TAGS_KEY = "5b75ed82bc8f0b7f5358ebd92076c2ad";
 
-
+//  测试包
     private static final String APP_VERSION_TYPE="debug";
+//  正式包
 //    private static final String APP_VERSION_TYPE="release";
     public MyApplication() {
         super();
@@ -45,7 +47,6 @@ public class MyApplication extends Application {
         //那么，就要把他们实例化的方法集中到一个类里面
         TempUtil.initialize(this);
 
-
     }
 
     /**
@@ -56,12 +57,7 @@ public class MyApplication extends Application {
         Logger.init(TAG);
         //初始化bugTags工具
         Bugtags.start(BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventBubble);
-        //初始化内存检查工具
-        refWatcher = LeakCanary.install(this);
-        //初始化 捕捉错误或者异常出现自定义界面的工具
-        CustomActivityOnCrash.install(this, null);
-        //初始化fresco
-        Fresco.initialize(this);
+        commonConfigure();
     }
 
     /**
@@ -72,6 +68,13 @@ public class MyApplication extends Application {
         Logger.init(TAG).setLogLevel(LogLevel.NONE);
         //初始化bugTags工具
         Bugtags.start(BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventNone);
+        commonConfigure();
+    }
+
+    /**
+     * 公共配置
+     */
+    public void commonConfigure(){
         //初始化内存检查工具
         refWatcher = LeakCanary.install(this);
         //初始化 捕捉错误或者异常出现自定义界面的工具
@@ -79,11 +82,11 @@ public class MyApplication extends Application {
         //初始化fresco
         Fresco.initialize(this);
     }
-
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
+//        屏蔽分包代码
+//        MultiDex.install(this);
     }
 
     /**
