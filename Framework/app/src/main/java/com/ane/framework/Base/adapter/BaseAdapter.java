@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
- 
+
 /**
  * <p>万能适配Adapter,减少赘于代码和加快开发流程</p>
  * @author zcx
@@ -21,7 +21,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter
 	private int[] layoutId;
 	private BaseViewHolder holder = null;
 	/**
-	 * 
+	 *
 	 * @param data 数据源
 	 * @param context 上下文
 	 * @param layoutId 布局Id
@@ -33,9 +33,9 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter
 		this.mLInflater=LayoutInflater.from(mContext);
 	}
 	/**
-	 * 
+     * 在初始化的时候不能确定layoutId,才可以不提供,但是必须重写checkLayoutId()方法
 	 * @param data 数据源
-	 * @param context 上下文 
+	 * @param context 上下文
 	 */
 	public BaseAdapter(List<T> data,Context context){
 		this.mList=data;
@@ -61,12 +61,12 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(layoutId==null){
 			holder= BaseViewHolder.get(mContext, position, convertView, parent, checkLayoutId());
-		}else{ 
-			holder= BaseViewHolder.get(mContext, position, convertView, parent, layoutId[checkLayout()]);
+		}else{
+			holder= BaseViewHolder.get(mContext, position, convertView, parent, layoutId[checkLayout(position)]);
 		}
 		convert(holder,position, mList.get(position));
 		return holder.getConvertView();
-	} 
+	}
 	/**
 	 * 实现具体控件的获取和赋值等业务
 	 * @param viewHolder viewHolder
@@ -74,12 +74,13 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter
 	 * @param t 数据源中,当前对应的bean
 	 */
 	public abstract void convert(BaseViewHolder viewHolder,int position,T t);
-	
+
 	/**
-	 * 根据业务逻辑确定layoutId位置,使用在listview中有几种样式 
+	 * 根据业务逻辑确定layoutId位置,使用在listview中有几种样式
+	 * @param position
 	 * @return 默认使用第一个,返回下标,从0开始
 	 */
-	public int checkLayout(){
+	public int checkLayout(int position){
 		return 0;
 	}
 	/**
