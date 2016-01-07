@@ -72,7 +72,7 @@ dependencies {
     /**  --------------------本地包------------------------------------ */
     //gradle libs目录下的所有jar文件
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':base_library_pullToRefresh_chenyoca')
+    compile project(':library_pullToRefresh')
     //gradle so文件
     //....
     //APP出现崩溃，出现自定义界面
