@@ -27,4 +27,8 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
         }
         return (R) view;
     }
+    
+    public View getItemView() {
+        return mConvertView;
+    }
 }
