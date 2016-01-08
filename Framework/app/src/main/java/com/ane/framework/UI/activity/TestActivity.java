@@ -13,22 +13,22 @@ public class TestActivity extends IBaseActivity {
     }
 
     @Override
-    protected void disposeBusiness() {
+    public void disposeBusiness() {
 
     }
 
     @Override
-    protected void findViews() {
+    public void findViews() {
 
     }
 
     @Override
-    protected void setViewsContent() {
+    public void setViewsContent() {
 
     }
 
     @Override
-    protected void setViewsListener() {
+    public void setViewsListener() {
 
     }
 
