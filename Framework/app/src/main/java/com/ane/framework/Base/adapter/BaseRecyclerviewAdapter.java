@@ -3,6 +3,7 @@ package com.ane.framework.Base.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -15,8 +16,7 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
     protected Context mContext;
     protected LayoutInflater mLInflater;
     private int[] layoutId;
-    private BaseRecyclerViewHolder holder = null;
-
+    private int count=0;
     /**
      * @param data     数据源
      * @param context  上下文
@@ -31,14 +31,9 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //TODO 要测试这个方法会调用几次,如果只会调用一次，else的代码可以删除
-        if (holder == null) {
-            holder = BaseRecyclerViewHolder.get(mContext, null, parent, layoutId[checkLayout()]);
-        } else {
-            holder = BaseRecyclerViewHolder.get(mContext,
-                                            holder.getConvertView(), parent, layoutId[checkLayout()]);
-        }
-        return holder;
+        BaseRecyclerViewHolder viewHolder= new BaseRecyclerViewHolder(inflateItemView(parent,count));
+        count++;
+        return viewHolder;
     }
 
     @Override
@@ -47,7 +42,7 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
         // 绑定数据
         onBindData(holder, position, item);
         //赋值相关事件,例如点击长按等
-        setListener(holder, position, item);
+        setListener(mContext,holder, position, item);
     }
 
     @Override
@@ -135,10 +130,10 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
 
     /**
      * 根据业务逻辑确定layoutId位置,使用在listview中有几种样式
-     *
+     * @param count 当前第几项,从0开始
      * @return 默认使用第一个, 返回下标, 从0开始
      */
-    public int checkLayout() {
+    public int checkLayout(int count) {
         return 0;
     }
 
@@ -158,8 +153,21 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
      * @param position   数据的位置
      * @param item       数据项
      */
-    protected void setListener(BaseRecyclerViewHolder viewHolder, int position, T item) {
+    protected void setListener(final Context context,BaseRecyclerViewHolder viewHolder, int position, T item) {
 
+    }
+
+    /**
+     * 解析布局资源
+     *
+     * @param viewGroup
+     * @param count 当前第几项,从0开始
+     * @return
+     */
+    protected View inflateItemView(ViewGroup viewGroup,int count) {
+        View convertView = mLInflater.inflate(layoutId[checkLayout(count)],
+               viewGroup, false);
+        return convertView;
     }
 
 }
