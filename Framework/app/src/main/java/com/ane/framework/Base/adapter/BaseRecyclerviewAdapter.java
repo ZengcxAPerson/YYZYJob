@@ -151,7 +151,6 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
      * 解析布局资源
      *
      * @param viewGroup
-     * @param count 当前第几项,从0开始
      * @return
      */
     protected View inflateItemView(ViewGroup viewGroup) {
