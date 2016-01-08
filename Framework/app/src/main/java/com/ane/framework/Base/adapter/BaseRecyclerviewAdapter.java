@@ -15,14 +15,13 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
     protected List<T> mList;
     protected Context mContext;
     protected LayoutInflater mLInflater;
-    private int[] layoutId;
-    private int count=0;
+    private int layoutId;
     /**
      * @param data     数据源
      * @param context  上下文
      * @param layoutId 布局Id
      */
-    public BaseRecyclerviewAdapter(List<T> data, Context context, int... layoutId) {
+    public BaseRecyclerviewAdapter(List<T> data, Context context, int layoutId) {
         this.mList = data;
         this.layoutId = layoutId;
         this.mContext = context;
@@ -31,8 +30,7 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        BaseRecyclerViewHolder viewHolder= new BaseRecyclerViewHolder(inflateItemView(parent,count));
-        count++;
+        BaseRecyclerViewHolder viewHolder= new BaseRecyclerViewHolder(inflateItemView(parent));
         return viewHolder;
     }
 
@@ -129,15 +127,6 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
     }
 
     /**
-     * 根据业务逻辑确定layoutId位置,使用在listview中有几种样式
-     * @param count 当前第几项,从0开始
-     * @return 默认使用第一个, 返回下标, 从0开始
-     */
-    public int checkLayout(int count) {
-        return 0;
-    }
-
-    /**
      * 绑定数据到Item View上
      *
      * @param viewHolder
@@ -147,8 +136,9 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
     protected abstract void onBindData(BaseRecyclerViewHolder viewHolder, int position, T item);
 
     /**
-     * 设置事件,默认空实现
+     *绑定相关事件,例如点击长按等,默认空实现
      *
+     * @param context    上下文
      * @param viewHolder
      * @param position   数据的位置
      * @param item       数据项
@@ -164,8 +154,8 @@ public abstract class BaseRecyclerviewAdapter<T> extends RecyclerView.Adapter<Ba
      * @param count 当前第几项,从0开始
      * @return
      */
-    protected View inflateItemView(ViewGroup viewGroup,int count) {
-        View convertView = mLInflater.inflate(layoutId[checkLayout(count)],
+    protected View inflateItemView(ViewGroup viewGroup) {
+        View convertView = mLInflater.inflate(layoutId,
                viewGroup, false);
         return convertView;
     }
