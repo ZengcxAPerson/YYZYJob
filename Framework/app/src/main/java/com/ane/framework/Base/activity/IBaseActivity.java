@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 
-import com.ane.framework.Base.interFace.ActivityWritCode;
+import com.ane.framework.Base.interFace.UIWritCode;
 import com.ane.framework.MyApplication;
 import com.bugtags.library.Bugtags;
 
@@ -16,7 +16,7 @@ import com.bugtags.library.Bugtags;
  * <p>建立公共的代码规范</p>
  * Created by zcx on 2015/11/14.
  */
-public abstract class IBaseActivity extends Activity implements ActivityWritCode {
+public abstract class IBaseActivity extends Activity implements UIWritCode {
     protected MyApplication application;
     private static final String TAG = "Base-Activity";
     protected LayoutInflater mLayoutInflater;
@@ -29,12 +29,11 @@ public abstract class IBaseActivity extends Activity implements ActivityWritCode
         application = (MyApplication) getApplication();
         application.addActivity(this);
         mLayoutInflater = LayoutInflater.from(this);
+
     }
-    /**
-     * <p>在子Activity初始化的时候调用</p>
-     * <p>将所有对代码规范的的初始化</p>
-     */
-    protected void activityWritInit() {
+
+    @Override
+    public void inItActivityWritCode() {
         findViews();
         setViewsContent();
         setViewsListener();

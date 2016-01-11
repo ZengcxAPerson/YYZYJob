@@ -1,6 +1,7 @@
 package com.ane.framework.Base.interFace;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,7 +24,9 @@ public interface FragmentToThis {
      */
     void setBundle(Bundle toBundle,Class<?> parentActivity);
 
-    View initView(int createViewId,ViewGroup container);
+    View initView(LayoutInflater inflaterint,int createViewId,ViewGroup container);
+
+    View getView(int viewId);
 
     interface fragmentToActivity{
         void getFragmentBundle(Bundle comeBundle);

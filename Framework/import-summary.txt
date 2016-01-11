@@ -17,10 +17,6 @@ Moved Files:
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => base_library_pullToRefresh_chenyoca\src\main\AndroidManifest.xml
-* assets\ => base_library_pullToRefresh_chenyoca\src\main\assets
-* res\ => base_library_pullToRefresh_chenyoca\src\main\res\
-* src\ => base_library_pullToRefresh_chenyoca\src\main\java\
 
 Next Steps:
 -----------

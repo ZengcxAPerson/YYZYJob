@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Framework.iml" filepath="$PROJECT_DIR$/Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/catch_error_library/catch_error_library.iml" filepath="$PROJECT_DIR$/catch_error_library/catch_error_library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library_pullToRefresh/library_pullToRefresh.iml" filepath="$PROJECT_DIR$/library_pullToRefresh/library_pullToRefresh.iml" />
     </modules>
   </component>
 </project>

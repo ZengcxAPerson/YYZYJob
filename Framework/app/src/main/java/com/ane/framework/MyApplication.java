@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ane.framework.Base.util.TempUtil;
+import com.ane.framework.constants.AppConfig;
 import com.bugtags.library.Bugtags;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.LogLevel;
@@ -18,27 +19,14 @@ import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
 
 public class MyApplication extends Application {
-    //程序log日志的标签,可以修改
-    private final static String TAG = "TAG";
     //保存Activity的队列
     private LinkedList<Activity> mSaveActivity;
     private RefWatcher refWatcher;
-    //bugTags应用key
-    private static final String BUG_TAGS_KEY = "5b75ed82bc8f0b7f5358ebd92076c2ad";
-
-//  测试包
-    private static final String APP_VERSION_TYPE="debug";
-//  正式包
-//    private static final String APP_VERSION_TYPE="release";
-    public MyApplication() {
-        super();
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
         mSaveActivity = new LinkedList<Activity>();
-        if(APP_VERSION_TYPE.equals("debug"))
+        if(AppConfig.APP_VERSION_TYPE.equals("debug"))
             debugStart();
         else
             releaseStart();
@@ -48,15 +36,17 @@ public class MyApplication extends Application {
         TempUtil.initialize(this);
 
     }
-
+    public MyApplication() {
+        super();
+    }
     /**
      * debug版本配置
      */
     public void debugStart() {
         //初始化log工具
-        Logger.init(TAG);
+        Logger.init(AppConfig.TAG);
         //初始化bugTags工具
-        Bugtags.start(BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventBubble);
+        Bugtags.start(AppConfig.BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventBubble);
         commonConfigure();
     }
 
@@ -65,9 +55,9 @@ public class MyApplication extends Application {
      */
     public void releaseStart() {
 //      隐藏log日志输出
-        Logger.init(TAG).setLogLevel(LogLevel.NONE);
+        Logger.init(AppConfig.TAG).setLogLevel(LogLevel.NONE);
         //初始化bugTags工具
-        Bugtags.start(BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventNone);
+        Bugtags.start(AppConfig.BUG_TAGS_KEY, this, Bugtags.BTGInvocationEventNone);
         commonConfigure();
     }
 

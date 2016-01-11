@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ane.framework.Base.interFace.FragmentToThis;
+import com.ane.framework.Base.interFace.UIWritCode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,9 +15,8 @@ import java.lang.reflect.Method;
 /**
  * Created by zengcanxiang on 2015/12/31.
  */
-public class BaseFragment extends Fragment implements FragmentToThis{
+public abstract class BaseFragment extends Fragment implements FragmentToThis,UIWritCode {
 
-    protected LayoutInflater mLayoutInflater;
     @Override
     public Bundle getBundle() {
         return getArguments();
@@ -24,10 +24,10 @@ public class BaseFragment extends Fragment implements FragmentToThis{
 
     @Override
     public void setBundle(Bundle toBundle, Class<?> parentActivity) {
-        Method method=null;
+        Method method = null;
         try {
-            method=parentActivity.getMethod("getFragmentBundle",Bundle.class);
-            method.invoke(parentActivity,toBundle);
+            method = parentActivity.getMethod("getFragmentBundle", Bundle.class);
+            method.invoke(parentActivity, toBundle);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -38,9 +38,22 @@ public class BaseFragment extends Fragment implements FragmentToThis{
     }
 
     @Override
-    public View initView(int createViewId,ViewGroup container) {
-        mLayoutInflater=LayoutInflater.from(getActivity());
-        View view=mLayoutInflater.inflate(createViewId,container,false);
+    public View initView(LayoutInflater inflaterint, int createViewId, ViewGroup container) {
+        View view = inflaterint.inflate(createViewId, container, false);
         return view;
     }
+
+    @Override
+    public View getView(int viewId) {
+        View view=getActivity().findViewById(viewId);
+        return view;
+    }
+    @Override
+    public void inItActivityWritCode() {
+        findViews();
+        setViewsContent();
+        setViewsListener();
+        disposeBusiness();
+    }
+
 }

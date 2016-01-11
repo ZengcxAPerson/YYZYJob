@@ -3,7 +3,7 @@ package com.ane.framework.Base.activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.ane.framework.Base.interFace.ActivityWritCode;
+import com.ane.framework.Base.interFace.UIWritCode;
 import com.ane.framework.MyApplication;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -13,7 +13,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * <p>建立公共的代码规范</p>
  * Created by Administrator on 2015/11/27.
  */
-public abstract class IBaseSwipeBackAty extends SwipeBackActivity implements ActivityWritCode {
+public abstract class IBaseSwipeBackAty extends SwipeBackActivity implements UIWritCode {
     protected MyApplication application;
     protected static final String TAG = "Base-SwipeBackAty";
 
@@ -23,11 +23,8 @@ public abstract class IBaseSwipeBackAty extends SwipeBackActivity implements Act
         application = (MyApplication) getApplication();
         application.addActivity(this);
     }
-    /**
-     * <p>在子Activity初始化的时候调用</p>
-     * <p>将所有对代码规范的的初始化</p>
-     */
-    protected void activityWritInit() {
+    @Override
+    public void inItActivityWritCode() {
         findViews();
         setViewsContent();
         setViewsListener();

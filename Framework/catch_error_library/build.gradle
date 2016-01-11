@@ -33,7 +33,3 @@ android {
         }
     }
 }
-
-dependencies {
-    compile project(':library_pullToRefresh')
-}

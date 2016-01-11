@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ane.framework.Base.interFace.ActivityToFragment;
-import com.ane.framework.Base.interFace.ActivityWritCode;
+import com.ane.framework.Base.interFace.UIWritCode;
 import com.ane.framework.MyApplication;
 
 /**
@@ -17,7 +17,7 @@ import com.ane.framework.MyApplication;
  * <p>建立公共的代码规范</p>
  * Created by Administrator on 2015/12/3.
  */
-public abstract class IBaseAppCompatAty extends AppCompatActivity implements ActivityToFragment,ActivityWritCode {
+public abstract class IBaseAppCompatAty extends AppCompatActivity implements ActivityToFragment,UIWritCode {
 
     protected MyApplication application;
     private static final String TAG = "Base-CompatActivity";
@@ -31,11 +31,8 @@ public abstract class IBaseAppCompatAty extends AppCompatActivity implements Act
         mFragmentManager= getFragmentManager();
 
     }
-    /**
-     * <p>在子Activity初始化的时候调用</p>
-     * <p>将所有对代码规范的的初始化</p>
-     */
-    protected void activityWritInit() {
+    @Override
+    public void inItActivityWritCode() {
         findViews();
         setViewsContent();
         setViewsListener();
