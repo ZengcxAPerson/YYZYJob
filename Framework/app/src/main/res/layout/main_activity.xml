@@ -4,19 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/testFrg"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 
-            <Button
-                android:id="@+id/tetBtn"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
 
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                />
-        </LinearLayout>
 </LinearLayout>

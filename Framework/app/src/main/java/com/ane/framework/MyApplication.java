@@ -33,6 +33,7 @@ public class MyApplication extends Application {
 
         //初始化util,暂时只有一个util需要实例化，因为里面需要有context的引用。如果又多个util需要实例化
         //那么，就要把他们实例化的方法集中到一个类里面
+        //但是，用Application来初始化util，会不会导致一些问题
         TempUtil.initialize(this);
 
     }

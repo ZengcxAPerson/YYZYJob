@@ -46,7 +46,9 @@ public class AsyncRequestService extends AsyncTask<Object, Object, ResultMsg> {
         paramList.put("params", postParam);
         paramList.put("timestamp", String.valueOf(new Date().getTime()));
 
-        ResultMsg resultMsg = HttpConnUtils.connRequest(postUrl, paramList, connectionTimeout, socketTimeout);
+        ResultMsg resultMsg =null;
+        //TODO HttpConnUtils准备用HttpURLConnection代替
+//      =HttpConnUtils.connRequest(postUrl, paramList, connectionTimeout, socketTimeout);
         System.out.println("金融请求  请求的URL为：" + postUrl + "请求参数为：" + postParam);
         if (resultMsg.getResult()) {
             if (!TextUtils.isEmpty(resultMsg.getResultInfo().toString())

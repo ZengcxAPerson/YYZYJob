@@ -1,15 +1,13 @@
 package com.ane.framework.UI.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.ane.framework.Base.activity.IBaseActivity;
 import com.ane.framework.R;
+import com.ane.framework.UI.fragment.testListViewFragment;
 
 public class MainActivity extends IBaseActivity {
-    private Button tetBtn;
-
+    private testListViewFragment fragment;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,25 +21,16 @@ public class MainActivity extends IBaseActivity {
     }
     @Override
     public void findViews() {
-        this.tetBtn = (Button) findViewById(R.id.tetBtn);
+        fragment=new testListViewFragment();
     }
 
     @Override
     public void setViewsContent() {
-        tetBtn.setText("示例");
+        getFragmentManager().beginTransaction().add(R.id.testFrg, fragment).commit();
     }
 
     @Override
     public void setViewsListener() {
-        tetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Snackbar.make(v, "测试", Snackbar.LENGTH_LONG)
-//                        .setAction("退出", null).show();
-//                startActivity(new Intent(MainActivity.this, TestActivity.class));
-//                throw new IllegalArgumentException("错误");
-            }
-        });
 
     }
 
