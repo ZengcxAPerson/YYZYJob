@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 
 import com.ane.framework.Base.interFace.UIWritCode;
 import com.ane.framework.MyApplication;
-import com.bugtags.library.Bugtags;
 
 
 /**
@@ -20,7 +18,6 @@ public abstract class IBaseActivity extends Activity implements UIWritCode {
     protected MyApplication application;
     private static final String TAG = "Base-Activity";
     protected LayoutInflater mLayoutInflater;
-    //    protected AsyncRequestService mAsyncRequestService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,24 +44,5 @@ public abstract class IBaseActivity extends Activity implements UIWritCode {
             Log.e(TAG, "IBaseActivity onDestroy removeActivity is error！" +
                     "please you see leaks the Memory overflow!");
         }
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Bugtags.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Bugtags.onPause(this);
-    }
-
-    @Override
-    public boolean dispatchGenericMotionEvent(MotionEvent ev) {
-        Bugtags.onDispatchTouchEvent(this, ev);
-        return super.dispatchGenericMotionEvent(ev);
     }
 }

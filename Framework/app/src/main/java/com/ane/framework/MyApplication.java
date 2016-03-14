@@ -15,31 +15,32 @@ import com.squareup.leakcanary.RefWatcher;
 
 import java.util.LinkedList;
 
-import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-
 
 public class MyApplication extends Application {
     //保存Activity的队列
     private LinkedList<Activity> mSaveActivity;
     private RefWatcher refWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mSaveActivity = new LinkedList<Activity>();
-        if(AppConfig.APP_VERSION_TYPE.equals("debug"))
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
             debugStart();
-        else
+        } else {
             releaseStart();
-
+        }
         //初始化util,暂时只有一个util需要实例化，因为里面需要有context的引用。如果又多个util需要实例化
         //那么，就要把他们实例化的方法集中到一个类里面
         //但是，用Application来初始化util，会不会导致一些问题
         TempUtil.initialize(this);
 
     }
+
     public MyApplication() {
         super();
     }
+
     /**
      * debug版本配置
      */
@@ -65,14 +66,16 @@ public class MyApplication extends Application {
     /**
      * 公共配置
      */
-    public void commonConfigure(){
+    public void commonConfigure() {
         //初始化内存检查工具
         refWatcher = LeakCanary.install(this);
         //初始化 捕捉错误或者异常出现自定义界面的工具
-        CustomActivityOnCrash.install(this, null);
+//        CustomActivityOnCrash.install(this, null);
         //初始化fresco
+
         Fresco.initialize(this);
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

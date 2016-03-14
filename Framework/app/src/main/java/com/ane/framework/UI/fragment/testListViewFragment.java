@@ -4,11 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.ane.framework.Base.adapter.BaseAdapter;
-import com.ane.framework.Base.adapter.BaseViewHolder;
 import com.ane.framework.Base.fragment.ListViewFragment;
 import com.ane.framework.R;
 import com.orhanobut.logger.Logger;
+import com.zengcanxiang.baseAdapter.absListView.HelperAdapter;
+import com.zengcanxiang.baseAdapter.absListView.HelperHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,9 @@ public class testListViewFragment extends ListViewFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mList=new ArrayList<>();
+        for(int i=0;i<60;i++){
+            mList.add(i+"");
+        }
         installRefresh(true);
         installLoadMore(true);
         inItActivityWritCode();
@@ -58,8 +61,8 @@ public class testListViewFragment extends ListViewFragment {
     }
 
     @Override
-    protected BaseAdapter bindAdapter() {
-        return new MyAdapter(mList,getActivity(),R.layout.test_list_item);
+    protected HelperAdapter bindAdapter() {
+        return new MyAdapter(mList,getActivity(),R.layout.test_list_item,R.layout.test_list_item2);
     }
 
     @Override
@@ -73,15 +76,24 @@ public class testListViewFragment extends ListViewFragment {
     }
 
 
-    class MyAdapter extends BaseAdapter<String> {
-        public MyAdapter(List data, Context context, int... layoutId) {
-            super(data, context, layoutId);
+    class MyAdapter extends HelperAdapter<String> {
+        public MyAdapter(List data, Context context, int... layoutIds) {
+            super(data, context, layoutIds);
         }
 
         @Override
-        public void convert(BaseViewHolder viewHolder, int position, String o) {
-            TextView testText=viewHolder.getView(R.id.testText);
-            testText.setText(position+"");
+        public void convert(HelperHolder helperHolder, int i, String s) {
+            TextView testText=helperHolder.getView(R.id.testText);
+            testText.setText(i+"");
         }
+
+        @Override
+        public int checkLayout(int position, String item) {
+            if(position%2==0){
+                return 1;
+            }
+            return 0;
+        }
+
     }
 }

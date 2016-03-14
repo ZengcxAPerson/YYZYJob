@@ -1,6 +1,5 @@
 package com.ane.framework.UI.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,12 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ane.framework.Base.activity.IBaseAppCompatAty;
-import com.ane.framework.Base.callback.DefaultOkHttpCallback;
-import com.ane.framework.Base.network.OkHttpUtil;
-import com.ane.framework.Base.network.ResultMsg;
 import com.ane.framework.R;
 import com.orhanobut.logger.Logger;
-import com.squareup.okhttp.Request;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -58,18 +53,6 @@ public class Main2Activity extends IBaseAppCompatAty {
             }
         });
 
-        OkHttpUtil.post(OkHttpUtil.builderMap(""), "http://www.baidu.com", new DefaultOkHttpCallback(this) {
-
-            @Override
-            public void RequestEnd(Context context, ResultMsg resultMsg) {
-
-            }
-
-            @Override
-            public void onError(Context context, Request request, Exception e) {
-
-            }
-        });
 
     }
 

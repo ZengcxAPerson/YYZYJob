@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
+ * 放置在嵌套listView或者ScrollView中,解决只显示一行
  * Created by Administrator on 2015/11/18.
  */
 public class MyListView extends ListView {

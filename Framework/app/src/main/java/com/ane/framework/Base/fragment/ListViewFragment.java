@@ -1,7 +1,6 @@
 package com.ane.framework.Base.fragment;
 
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.ane.framework.Base.adapter.BaseAdapter;
 import com.ane.framework.R;
+import com.zengcanxiang.baseAdapter.absListView.HelperAdapter;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -25,7 +24,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 public abstract class ListViewFragment extends BaseFragment implements AbsListView.OnScrollListener {
 
     protected ListView mListView;
-    protected BaseAdapter mAdapter;
+    protected HelperAdapter mAdapter;
     private final int listView_layoutId = R.layout.base_fragment_listview;
     private final int listView_viewId = R.id.base_listView;
     private final int ptrLayoutId = R.id.base_ptrLayout;
@@ -158,7 +157,7 @@ public abstract class ListViewFragment extends BaseFragment implements AbsListVi
      *
      * @return
      */
-    protected abstract BaseAdapter bindAdapter();
+    protected abstract HelperAdapter bindAdapter();
 
     /**
      * 默认设置的刷新头部
@@ -201,7 +200,7 @@ public abstract class ListViewFragment extends BaseFragment implements AbsListVi
         return mListView;
     }
 
-    public BaseAdapter getAdapter() {
+    public HelperAdapter getAdapter() {
         return mAdapter;
     }
 

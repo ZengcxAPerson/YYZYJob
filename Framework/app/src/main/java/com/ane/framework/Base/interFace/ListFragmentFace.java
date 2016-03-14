@@ -1,6 +1,7 @@
 package com.ane.framework.Base.interFace;
 
-import com.ane.framework.Base.adapter.BaseAdapter;
+
+import com.zengcanxiang.baseAdapter.absListView.BaseAdapter;
 
 /**
  * Created by zengcanxiang on 2016/1/10.
